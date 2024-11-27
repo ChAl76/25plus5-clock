@@ -44,84 +44,112 @@ function Clock() {
   };
 
   return (
-    <main className="clock">
-      <div id="break-label" className="clock__label">
-        Break Length
-      </div>
-      <div id="session-label" className="clock__label">
-        Session Length
-      </div>
+    <div className="clock__container">
+      <header className="fa mb-2 clock__header">
+        <h1>25 + 5 Clock</h1>
+      </header>
+      <main className="clock">
+        <div className="clock__controls">
+          <div className="clock__control-break">
+            <div id="break-label" className="clock__label">
+              Break Length
+            </div>
+            <section className="clock__buttons-break">
+              <button
+                id="break-decrement"
+                className="clock__button"
+                onClick={() => dispatch(decrementBreak())}
+                disabled={isRunning}
+              >
+                <i className="fa fa-arrow-down"> </i>
+              </button>
+              <span id="break-length" className="fa fa-lg clock__value">
+                {breakLength}
+              </span>
+              <button
+                id="break-increment"
+                className="clock__button"
+                onClick={() => dispatch(incrementBreak())}
+                disabled={isRunning}
+              >
+                <i className="fa fa-arrow-up"> </i>
+              </button>
+            </section>
+          </div>
 
-      <div className="clock__controls">
-        <button
-          id="break-decrement"
-          className="btn-level"
-          onClick={() => dispatch(decrementBreak())}
-          disabled={isRunning}
-        >
-          <i className="fas fa-arrow-down fa-2x"></i>
-        </button>
-        <span id="break-length" className="clock__value">
-          {breakLength}
-        </span>
-        <button
-          id="break-increment"
-          className="clock__button"
-          onClick={() => dispatch(incrementBreak())}
-          disabled={isRunning}
-        >
-          +
-        </button>
-
-        <button
-          id="session-decrement"
-          className="clock__button"
-          onClick={() => dispatch(decrementSession())}
-          disabled={isRunning}
-        >
-          -
-        </button>
-        <span id="session-length" className="clock__value">
-          {sessionLength}
-        </span>
-        <button
-          id="session-increment"
-          className="clock__button"
-          onClick={() => dispatch(incrementSession())}
-          disabled={isRunning}
-        >
-          +
-        </button>
-      </div>
-
-      <div className="clock__timer">
-        <div id="timer-label" className="clock__label">
-          {timerLabel}
+          <div className="clock__control-session">
+            <div id="session-label" className="clock__label">
+              Session Length
+            </div>
+            <section className="clock__buttons-session">
+              <button
+                id="session-decrement"
+                className="clock__button"
+                onClick={() => dispatch(decrementSession())}
+                disabled={isRunning}
+              >
+                <i className="fa fa-arrow-down"> </i>
+              </button>
+              <span id="session-length" className="fa fa-lg clock__value">
+                {sessionLength}
+              </span>
+              <button
+                id="session-increment"
+                className="clock__button"
+                onClick={() => dispatch(incrementSession())}
+                disabled={isRunning}
+              >
+                <i className="fa fa-arrow-up"> </i>
+              </button>
+            </section>
+          </div>
         </div>
-        <div id="time-left" className="clock__time">
-          {formatTime(timeLeft)}
+
+        <div className="clock__timer">
+          <div id="timer-label" className="clock__label">
+            <h2>{timerLabel}</h2>
+          </div>
+          <div id="time-left" className="clock__time">
+            {formatTime(timeLeft)}
+          </div>
         </div>
-      </div>
 
-      <div className="clock__actions">
-        <button
-          id="start_stop"
-          className="clock__button"
-          onClick={handleStartStop}
+        <div className="clock__actions">
+          <button
+            id="start_stop"
+            className="clock__button-action"
+            onClick={handleStartStop}
+          >
+            <i className="fa fa-play fa-lg "></i>
+            <i className="fa fa-pause fa-lg "></i>
+          </button>
+          <button
+            id="reset"
+            className="clock__button-action"
+            onClick={handleReset}
+          >
+            <i className="fa fa-refresh fa-lg"></i>
+          </button>
+        </div>
+
+        <audio
+          id="beep"
+          src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"
+          preload="auto"
+        ></audio>
+      </main>
+      <footer className="clock__footer">
+        Created By <br />
+        <a
+          href="https://github.com/ChAl76"
+          target="_blank"
+          rel="noreferrer"
+          className="clock__author-link"
         >
-          Start/Stop
-        </button>
-        <button id="reset" className="clock__button" onClick={handleReset}>
-          Reset
-        </button>
-      </div>
-
-      <audio
-        id="beep"
-        src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"
-        preload="auto"
-      ></audio>
-    </main>
+          Alexander Chorny
+        </a>
+      </footer>
+    </div>
   );
 }
 
